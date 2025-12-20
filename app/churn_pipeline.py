@@ -3,12 +3,9 @@
 import io
 import time
 from typing import Dict, Any, Tuple, List
-
 import numpy as np
 import pandas as pd
-
 from fastapi import UploadFile
-
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import (
     roc_auc_score,
@@ -17,20 +14,14 @@ from sklearn.metrics import (
     recall_score,
     f1_score,
 )
-
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
-
 import plotly.express as px
 import plotly.io as pio
-
 from .config import PLOTS_DIR
 
-
-# ==============================
 # Чтение загруженных файлов
-# ==============================
 
 def _read_uploaded_table(upload: UploadFile) -> pd.DataFrame:
     """
@@ -45,12 +36,7 @@ def _read_uploaded_table(upload: UploadFile) -> pd.DataFrame:
         return pd.read_excel(bio)
     else:
         return pd.read_csv(bio)
-
-
-# ==============================
-# Предобработка (как в ноутбуке)
-# ==============================
-
+# Предобработка
 def preprocess_data(events: pd.DataFrame, socdem: pd.DataFrame) -> pd.DataFrame:
     """
     Базовая предобработка из ноутбука:
@@ -83,11 +69,7 @@ def preprocess_data(events: pd.DataFrame, socdem: pd.DataFrame) -> pd.DataFrame:
 
     return merged
 
-
-# ==============================
-# Построение final_df (как в ноутбуке)
-# ==============================
-
+# Построение final_df
 def build_user_features(data: pd.DataFrame) -> pd.DataFrame:
     df_all = data.copy()
     col_dt = "Дата и время события"
@@ -211,10 +193,7 @@ def build_user_features(data: pd.DataFrame) -> pd.DataFrame:
 
     return final_df
 
-
-# ==============================
 # Обучение моделей и метрики
-# ==============================
 
 def evaluate_model(
     model,
@@ -371,10 +350,7 @@ def train_and_evaluate_models(final_df: pd.DataFrame) -> Dict[str, Dict[str, Any
 
     return metrics
 
-
-# ==============================
-# Графики (Plotly) — БЕЗ data_frame для bar
-# ==============================
+# Графики (Plotly)
 
 def generate_plots(
     data: pd.DataFrame,
@@ -709,9 +685,7 @@ def generate_plots(
     return plot_urls
 
 
-# ==============================
 # Точка входа для FastAPI
-# ==============================
 
 def process_uploaded_files(
     data_file: UploadFile,
@@ -724,7 +698,6 @@ def process_uploaded_files(
     final_df = build_user_features(data)
 
     metrics = train_and_evaluate_models(final_df)
-    # ВАЖНО: для графиков используем уже очищенные data, а не сырые events
     plots = generate_plots(data, socdem, final_df)
 
     return metrics, plots
