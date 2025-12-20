@@ -1,0 +1,45 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.swp
+*.tmp
+*.log
+
+# Environments
+venv/
+.venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+
+# *** CRITICAL FOR NDA ***
+# Never commit data files or user logs
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.parquet
+*.orc
+*.json
+*.pickle
+*.pkl
+*.sav
+*.feather
+*.arrow
+
+# Generated interactive graphs
+static/plots/
+!static/plots/.gitkeep
+
+# Temporary
+*.bak
+*.old

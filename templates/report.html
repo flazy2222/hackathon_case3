@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>ЖКХ Аналитика — Отчёт</title>
+  <link rel="stylesheet" href="{{ request.url_for('static', path='styles.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="app-container">
+
+      <!-- ЛЕВАЯ КОЛОНКА — инфо/легенда -->
+      <aside class="sidebar">
+        <div>
+          <div class="sidebar-title">Отчёт по дому</div>
+          <div class="sidebar-subtitle">Результаты анализа поведения и оттока пользователей мобильного приложения ЖКХ</div>
+          <div class="sidebar-pill">
+            <span>●</span> Аналитика на основе загруженных CSV
+          </div>
+        </div>
+
+        <div>
+          <div class="sidebar-section-title">Что показывает отчёт</div>
+          <ul class="sidebar-list">
+            <li>
+              <span>Модели оттока</span>
+              <span>CatBoost / LGBM / XGBoost</span>
+            </li>
+            <li>
+              <span>Качество прогноза</span>
+              <span>AUC / F1 / Recall</span>
+            </li>
+            <li>
+              <span>Сложность моделей</span>
+              <span>Время обучения</span>
+            </li>
+            <li>
+              <span>Профиль активности</span>
+              <span>Частота действий, производители, время суток</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-footer">
+          Используйте эти метрики для настройки коммуникаций с жителями,
+          выбора KPI по удержанию и формирования продуктовых гипотез:
+          какие функции приложения важнее всего для вовлечённости.
+        </div>
+
+        <a href="/" class="back-link">← Загрузить другие данные</a>
+      </aside>
+
+      <!-- ПРАВАЯ КОЛОНКА — сам дашборд -->
+      <main class="main">
+
+        <header class="app-header">
+          <div class="app-header-left">
+            <div class="app-title">Панель результатов</div>
+            <div class="app-subtitle">
+              Модели прогнозирования оттока пользователей и визуализация поведения в приложении ЖКХ
+            </div>
+            <div class="tag-row">
+              <span class="tag">Модель churn</span>
+              <span class="tag">Сравнение алгоритмов</span>
+              <span class="tag">Поведенственные метрики</span>
+            </div>
+          </div>
+        </header>
+
+        {% if metrics %}
+          {% set main_model = 'CatBoost' if 'CatBoost' in metrics else (metrics.keys()|list|first) %}
+          {% set mm = metrics[main_model] %}
+
+          <!-- БЛОК КЛЮЧЕВЫХ МЕТРИК -->
+          <section class="card metrics-section">
+            <div class="form-title">Ключевые показатели по модели {{ main_model }}</div>
+            <div class="form-subtitle">
+              Основная модель используется как референс для оценки качества прогноза оттока пользователей.
+            </div>
+
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-label">ROC AUC</div>
+                <div class="metric-value-main">{{ "%.3f"|format(mm.get("ROC_AUC", 0.0)) }}</div>
+                <div class="metric-chip">Качество ранжирования по вероятности оттока</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">F1 / Recall</div>
+                <div class="metric-value-main">
+                  {{ "%.3f"|format(mm.get("F1", 0.0)) }}
+                </div>
+                <div class="metric-chip">
+                  Recall: {{ "%.3f"|format(mm.get("Recall", 0.0)) }}
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Доля оттока</div>
+                <div class="metric-value-main">
+                  {{ "%.1f"|format(mm.get("churn_share", 0.0) * 100) }}%
+                </div>
+                <div class="metric-chip">
+                  Устройства с признаком оттока относительно всей выборки.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- СРАВНЕНИЕ МОДЕЛЕЙ -->
+          <section class="models-card">
+            <h3>Сравнение моделей прогнозирования оттока</h3>
+            <p>
+              Ниже приведены основные метрики для разных алгоритмов машинного обучения, обученных на тех же данных.
+            </p>
+
+            <div class="models-table-wrapper">
+              <table class="models-table">
+                <thead>
+                  <tr>
+                    <th>Модель</th>
+                    <th>ROC AUC</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1</th>
+                    <th>Train, сек</th>
+                    <th>Train size</th>
+                    <th>Test size</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for model_name, m in metrics.items() %}
+                    <tr>
+                      <td>{{ model_name }}</td>
+                      <td>{{ "%.3f"|format(m.get("ROC_AUC", 0.0)) }}</td>
+                      <td>{{ "%.3f"|format(m.get("Accuracy", 0.0)) }}</td>
+                      <td>{{ "%.3f"|format(m.get("Precision", 0.0)) }}</td>
+                      <td>{{ "%.3f"|format(m.get("Recall", 0.0)) }}</td>
+                      <td>{{ "%.3f"|format(m.get("F1", 0.0)) }}</td>
+                      <td>{{ "%.2f"|format(m.get("Train_time_sec", 0.0)) }}</td>
+                      <td>{{ m.get("n_train", 0) }}</td>
+                      <td>{{ m.get("n_test", 0) }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        {% else %}
+          <section class="card">
+            <div class="form-title">Метрики не были рассчитаны</div>
+            <div class="form-subtitle">
+              Проверьте формат загруженных файлов и попробуйте запустить анализ ещё раз.
+            </div>
+            <a href="/" class="back-link">← Вернуться к загрузке данных</a>
+          </section>
+        {% endif %}
+
+        <!-- ИНТЕРАКТИВНЫЕ ГРАФИКИ -->
+        <section class="plots-section">
+          <h3>Интерактивные графики поведения пользователей</h3>
+          <p class="form-subtitle">
+            Используйте графики, чтобы детальнее понять профиль активности жильцов,
+            распределение оттока и особенности использования функционала приложения.
+          </p>
+
+          {% if plots %}
+            <div class="plot-grid">
+              {% for plot in plots %}
+                <div class="plot-item">
+                  <iframe src="{{ plot }}"></iframe>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p>Графики не были сгенерированы.</p>
+          {% endif %}
+        </section>
+
+      </main>
+    </div>
+  </div>
+</body>
+</html>

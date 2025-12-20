@@ -1,0 +1,572 @@
+﻿:root {
+  --bg: #f3f6ff;
+  --bg-accent: #e4ebff;
+  --primary: #2f5bff;
+  --primary-dark: #2345c9;
+  --text-main: #122033;
+  --text-muted: #6c7a93;
+  --card-bg: #ffffff;
+  --radius-xl: 28px;
+  --radius-md: 18px;
+  --shadow-soft: 0 18px 40px rgba(26, 44, 90, 0.14);
+  --shadow-phone: 0 20px 40px rgba(13, 27, 61, 0.35);
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  background: radial-gradient(circle at top left, #f0f3ff 0, #f3f6ff 40%, #eef2ff 100%);
+  color: var(--text-main);
+}
+
+/* SHELL */
+
+.hero-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 24px;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 1240px;
+  background: linear-gradient(135deg, #f7f9ff 0%, #ffffff 40%, #f3f7ff 100%);
+  border-radius: 36px;
+  box-shadow: var(--shadow-soft);
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at top left, rgba(92, 122, 255, 0.18), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(68, 100, 255, 0.08), transparent 55%);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+/* LEFT: TEXT + FORM */
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.hero-kicker {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-right: 20px;
+}
+
+.hero-title span {
+  color: var(--primary);
+}
+
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 460px;
+}
+
+.hero-bullets {
+  margin: 8px 0 4px;
+  padding-left: 20px;
+  font-size: 15px;
+  color: var(--text-main);
+}
+
+.hero-bullets li {
+  margin-bottom: 6px;
+}
+
+/* UPLOAD CARD */
+
+.upload-card {
+  margin-top: 10px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 28px rgba(27, 47, 108, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(47, 91, 255, 0.08);
+}
+
+.upload-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.upload-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.upload-field label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.upload-field small {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+input[type="file"] {
+  width: 100%;
+  font-size: 13px;
+}
+
+.upload-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 14px 30px rgba(47, 91, 255, 0.35);
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary span {
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(35, 69, 201, 0.40);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 20px rgba(35, 69, 201, 0.25);
+}
+
+.upload-helper {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* RIGHT: PHONE MOCKUPS */
+
+.hero-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-stack {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 420px;
+}
+
+.phone {
+  position: absolute;
+  width: 190px;
+  height: 380px;
+  border-radius: 38px;
+  background: #0f172a;
+  box-shadow: var(--shadow-phone);
+  overflow: hidden;
+  transform-origin: center;
+}
+
+.phone-frame {
+  position: absolute;
+  inset: 6px;
+  border-radius: 32px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+/* Расположим три телефона в стиле слайда */
+
+.phone-main {
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%) rotate(-3deg);
+}
+
+.phone-left {
+  left: 0;
+  top: 70px;
+  transform: translateX(-18%) rotate(-12deg);
+  opacity: 0.96;
+}
+
+.phone-right {
+  right: 0;
+  top: 10px;
+  transform: translateX(18%) rotate(10deg);
+  opacity: 0.96;
+}
+
+/* Содержимое экранов (просто стилизация под «оплату квитанций») */
+
+.screen {
+  width: 100%;
+  height: 100%;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  color: var(--text-main);
+}
+
+.screen-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.screen-block {
+  background: #f4f6ff;
+  border-radius: 16px;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+}
+
+.screen-block-title {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.screen-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.screen-label {
+  color: var(--text-muted);
+}
+
+.screen-value {
+  font-weight: 600;
+}
+
+.screen-cta {
+  margin-top: auto;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* SMALL BADGE ON PHONES */
+
+.phone-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: #94a3b8;
+}
+
+/* REPORT PAGE LAYOUT (используем уже существующие классы, но подправим фон) */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at top left, #f0f3ff 0, #f3f6ff 40%, #eef2ff 100%);
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1220px;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.sidebar {
+  background: linear-gradient(145deg, #ffffff, #f6f7ff);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.sidebar-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.sidebar-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.sidebar-list li {
+  margin-bottom: 6px;
+}
+
+.sidebar-pill {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e6ecff;
+  font-size: 11px;
+  color: var(--primary-dark);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.back-link {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #ffffff, #f3f6ff);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 16px 18px;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.app-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef1ff;
+  color: var(--primary-dark);
+}
+
+/* карточки, таблицы, графики — оставляем как раньше (card, metrics-section и т.п.) */
+
+.card {
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  padding: 16px 18px;
+}
+
+.metrics-section { display: flex; flex-direction: column; gap: 12px; }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric-card {
+  background: #f9fbff;
+  border-radius: 18px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.metric-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+}
+
+.metric-value-main {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.metric-chip {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.models-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.models-table-wrapper { overflow-x: auto; }
+
+.models-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.models-table th,
+.models-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e1e5f2;
+  text-align: right;
+}
+
+.models-table th:first-child,
+.models-table td:first-child { text-align: left; }
+
+.models-table thead { background: #f5f7ff; }
+
+.plots-section {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.plot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.plot-item {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e3e7ff;
+  background: #f5f7ff;
+}
+
+.plot-item iframe {
+  width: 100%;
+  height: 360px;
+  border: none;
+}
+
+/* ADAPTIVE */
+
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 26px 24px 30px;
+  }
+  .hero-right {
+    order: -1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-shell {
+    padding: 16px;
+  }
+  .hero-title {
+    font-size: 26px;
+  }
+  .hero-container {
+    border-radius: 24px;
+  }
+  .phone-stack {
+    height: 360px;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .plot-grid {
+    grid-template-columns: 1fr;
+  }
+}

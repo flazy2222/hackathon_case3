@@ -1,0 +1,14 @@
+﻿fastapi
+uvicorn[standard]
+pandas
+numpy
+scikit-learn
+catboost
+lightgbm
+xgboost
+matplotlib
+seaborn
+jinja2
+python-multipart
+plotly
+openpyxl

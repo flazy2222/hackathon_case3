@@ -1,0 +1,162 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Оплата жилищно-коммунальных услуг — Аналитика</title>
+  <link rel="stylesheet" href="{{ request.url_for('static', path='styles.css') }}">
+</head>
+<body>
+  <div class="hero-shell">
+    <div class="hero-container">
+
+      <!-- ПРАВАЯ ЧАСТЬ — МОКАПЫ ТЕЛЕФОНОВ -->
+      <div class="hero-right">
+        <div class="phone-stack">
+
+          <div class="phone phone-left">
+            <div class="phone-frame">
+              <div class="screen">
+                <div class="screen-header">Оплата ЖКУ</div>
+                <div class="screen-block">
+                  <div class="screen-block-title">Платёжный документ</div>
+                  <div class="screen-row">
+                    <span class="screen-label">Квартира</span>
+                    <span class="screen-value">№ 72</span>
+                  </div>
+                  <div class="screen-row">
+                    <span class="screen-label">Адрес</span>
+                    <span class="screen-value">Новощукинское шоссе, 13</span>
+                  </div>
+                </div>
+                <div class="screen-block">
+                  <div class="screen-row">
+                    <span class="screen-label">Электроэнергия</span>
+                    <span class="screen-value">632,08 ₽</span>
+                  </div>
+                  <div class="screen-row">
+                    <span class="screen-label">Отопление</span>
+                    <span class="screen-value">1 254,90 ₽</span>
+                  </div>
+                  <div class="screen-row">
+                    <span class="screen-label">Итого</span>
+                    <span class="screen-value">1 886,98 ₽</span>
+                  </div>
+                </div>
+                <div class="screen-cta">Перейти к оплате</div>
+                <div class="phone-badge">Мобильное приложение ЖКХ</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone phone-main">
+            <div class="phone-frame">
+              <div class="screen">
+                <div class="screen-header">Счёт оплачен</div>
+                <div class="screen-block">
+                  <div class="screen-block-title">Спасибо за оплату!</div>
+                  <div class="screen-row">
+                    <span class="screen-label">Дата</span>
+                    <span class="screen-value">25.11.2025</span>
+                  </div>
+                  <div class="screen-row">
+                    <span class="screen-label">Сумма</span>
+                    <span class="screen-value">3 738,40 ₽</span>
+                  </div>
+                </div>
+                <div class="screen-block">
+                  <div class="screen-block-title">История начислений</div>
+                  <div class="screen-row">
+                    <span class="screen-label">Последние 6 месяцев</span>
+                    <span class="screen-value">+4,2%</span>
+                  </div>
+                </div>
+                <div class="screen-cta">Показать квитанцию</div>
+                <div class="phone-badge">Push, e-mail, квитанции</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone phone-right">
+            <div class="phone-frame">
+              <div class="screen">
+                <div class="screen-header">Личный кабинет</div>
+                <div class="screen-block">
+                  <div class="screen-block-title">Заявки и обращения</div>
+                  <div class="screen-row">
+                    <span class="screen-label">Активных заявок</span>
+                    <span class="screen-value">3</span>
+                  </div>
+                  <div class="screen-row">
+                    <span class="screen-label">Среднее время ответа</span>
+                    <span class="screen-value">1.8 часа</span>
+                  </div>
+                </div>
+                <div class="screen-block">
+                  <div class="screen-block-title">Собрания</div>
+                  <div class="screen-row">
+                    <span class="screen-label">Текущее голосование</span>
+                    <span class="screen-value">Лифт / ремонт</span>
+                  </div>
+                </div>
+                <div class="screen-cta">Открыть домофон</div>
+                <div class="phone-badge">Чаты, собрания, сервис</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ЛЕВАЯ ЧАСТЬ — ТЕКСТ + ФОРМА -->
+      <div class="hero-left">
+        <div class="hero-kicker">Аналитика поведения в ЖКХ-приложении</div>
+        <div class="hero-title">
+          Оплата жилищно-коммунальных<br>услуг и <span>умный churn-анализ</span>
+        </div>
+        <div class="hero-subtitle">
+          На основе логов мобильного приложения ЖКХ строим сегменты пользователей,
+          прогнозируем отток и находим точки роста вовлечённости жителей.
+        </div>
+
+        <ul class="hero-bullets">
+          <li>анализируют историю действий: оплаты, заявки, показания, домофон;</li>
+          <li>выделяют типы поведения жителей и риск оттока;</li>
+          <li>оценивают вовлечённость по функциям приложения и устройствам.</li>
+        </ul>
+
+        <form action="/upload" method="post" enctype="multipart/form-data" class="upload-card">
+          <div class="upload-title">Загрузить выгрузки приложения</div>
+          <div class="upload-caption">
+            Поддерживаются CSV-файлы: лог событий мобильного приложения и словарь соцдем-профилей устройств.
+          </div>
+
+          <div class="upload-grid">
+            <div class="upload-field">
+              <label for="data_file">Лог событий (например, <strong>датасет_new.csv</strong>)</label>
+              <input id="data_file" type="file" name="data_file" required>
+              <small>Содержит последовательности действий пользователей в приложении.</small>
+            </div>
+
+            <div class="upload-field">
+              <label for="dct_file">Словарь соцдема (например, <strong>словарь_соцдема.csv</strong>)</label>
+              <input id="dct_file" type="file" name="dct_file" required>
+              <small>Возраст, пол и прочие характеристики устройств/жильцов.</small>
+            </div>
+          </div>
+
+          <div class="upload-actions">
+            <button type="submit" class="btn-primary">
+              <span>▶</span>
+              Запустить анализ
+            </button>
+            <div class="upload-helper">
+              Модель обучится на ваших данных, рассчитает метрики оттока и построит дашборд.
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
