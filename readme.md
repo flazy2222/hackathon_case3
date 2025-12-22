@@ -1,4 +1,5 @@
 # Hackathon Case 3 — Сервис аналитики поведения и обращений пользователей (NDA, без данных)
+Ссылка на презентацию : https://docs.google.com/presentation/d/17UGZYj5GpMHbIJUg2emHNUj4x5RyRM4J/edit?slide=id.p2#slide=id.p2
 
 Этот репозиторий содержит сервис для:
 - анализа поведения пользователей в мобильном приложении ЖКХ;
@@ -72,7 +73,7 @@
 ## Технологический стек
 
 - **Backend:** FastAPI, Uvicorn
-- **ML / данные:** pandas, numpy, scikit-learn, lightgbm
+- **ML / данные:** pandas, numpy, scikit-learn, lightgbm,transformers, pytorch
 - **Визуализация:** Plotly (интерактивные HTML-графики)
 - **NLP:** классические модели (TF-IDF + ML-классификаторы, описаны в ноутбуках)
 - **Контейнеризация:** Docker, docker-compose
@@ -92,3 +93,4 @@ git clone https://github.com/flazy2222/hackathon_case3.git
 cd hackathon_case3
 
 docker-compose up --build
+
