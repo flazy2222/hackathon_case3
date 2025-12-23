@@ -1,6 +1,8 @@
 # Hackathon Case 3 — Сервис аналитики поведения и обращений пользователей (NDA, без данных)
 Ссылка на презентацию : https://docs.google.com/presentation/d/17UGZYj5GpMHbIJUg2emHNUj4x5RyRM4J/edit?slide=id.p2#slide=id.p2
+
 Ноутбук_nlp: https://colab.research.google.com/drive/1S68ffcm6VlMlo2BIl7mcvhXYDE__QCvv?usp=sharing
+
 Папка с моделями: https://drive.google.com/drive/folders/17JbOwP2g7E-ZZSWn388QgEizjGxrc2Er?usp=sharing
 Этот репозиторий содержит сервис для:
 - анализа поведения пользователей в мобильном приложении ЖКХ;
@@ -94,5 +96,6 @@ git clone https://github.com/flazy2222/hackathon_case3.git
 cd hackathon_case3
 
 docker-compose up --build
+
 
 
